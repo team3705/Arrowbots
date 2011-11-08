@@ -97,12 +97,13 @@ public:
 	 */
 	void Autonomous(void) {
 
-		/*
+		
 		 //disable watchdog and start timer
 		 GetWatchdog().SetEnabled(false);
 		 gameTimer->Start();
 		 gameTimer->Reset();
-
+		
+		 /*
 		 //variables used to hold light sensors' values
 		 rightSensor = 0;
 		 leftSensor = 0;
@@ -132,8 +133,9 @@ public:
 		 myRobot->Drive(speed, -0.5); // right and middle sensors are on line	
 
 		 } else if (leftSensor == 1 && middleSensor == 1 && rightSensor == 0) {
-		 myRobot->Drive(speed, 0.5); // left and middle sensors are on line
-
+		*/
+	         myRobot->Drive(speed, 0.5); // left and middle sensors are on line
+		 /*
 		 } else if ((leftSensor == 1 && middleSensor == 1 && rightSensor
 		 == 1) || (leftSensor == 1 && middleSensor == 0
 		 && rightSensor == 1)) {
