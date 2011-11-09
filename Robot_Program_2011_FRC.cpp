@@ -38,14 +38,19 @@ class RobotDemo : public SimpleRobot {
 	DigitalInput *left; // used to get 0 or 1 from light sensors
 	DigitalInput *middle;
 	DigitalInput *right;
-
+  
 	RobotDrive *shoulderMotor;
 	RobotDrive *armMotor;
 	Servo *gripperMotor;
-	
+  
 	Servo *minibotDeployMotor;
 	Servo *minibotCloseMotor1;
 	Servo *minibotCloseMotor2;
+
+        int time_to_send;   //Variable for number of times messages being relayed back. 
+        DriverStation *ds; //Driver Station object for getting selections.
+        DriverStationLCD *dsLCD;
+
 
 	//important variables declared here
 	float shoulderPotentiometerReading; //variable used to hold shoulder actuator's potentiometer reading
@@ -82,6 +87,9 @@ public:
 		minibotCloseMotor2 = new Servo (8); //drive using motor connected to servo channel 3
 
 
+		ds = DriverStation::GetInstance();
+		dsLCD = DriverStationLCD::GetInstance();
+
 		//set the variables declared earlier below
 		shoulderDestinationVoltage = 5-shoulderPotentiometerChannel->GetVoltage();
 
@@ -103,20 +111,37 @@ public:
 		 gameTimer->Start();
 		 gameTimer->Reset();
 		
+		 float speed = 0.15; //CHECK-> enough speed to get to the peg in time as shoulder rises slowly            
 		 /*
 		 //variables used to hold light sensors' values
 		 rightSensor = 0;
 		 leftSensor = 0;
 		 middleSensor = 0;
 		 */
-		 std::cout << "Running Autonomous" << std::endl;
-		 for(int x=0, x <2;x++) {
-		   
-		 float speed = 0.15; //CHECK-> enough speed to get to the peg in time as shoulder rises slowly
-		 myRobot->Drive(speed,0); //Move forward
-		 std::cout << x << std::endl;
+		 while (IsAutonomous())
+		  {
+		    time_to_send++;
+		    
+		    if(time_to_send >50 )
+		   {
+		     time_to_send=0;
+		     //Print a message to the Driver Station LCD
+		     dsLCD->Printf(DriverStationLCD::kUser_Line,1, "Autonomous is running, RUN FOR COVER"); //Give output to dsLCD
+		     dsLCD->UpdateLCD();
+		   }
+
+		 for(int x=0, x<4; x++) {
+		 
+		   if (x=1)
+		     myRobot->Drive(0,0); //Stop the robot initially
+		   else if (x=2)
+		     myRobot->Drive(speed,0); //Move the robot
+		   else if (x=3)
+		     myRobot->Drive(0.5,0); //Decrease the speed
+		   else
+		     myRobot->Drive(0,0); //If anything else happens, STOP the robot
+		     }
 		 }
-		 std::cout << "Autonomous Over" << std::endl;
 		 /*
 		 float releaseVoltage;
 		 bool reachedEndOfLine = false;
