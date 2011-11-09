@@ -133,14 +133,15 @@ public:
 		 for(int x=0, x<4; x++) {
 		 
 		   if (x=1)
-		     myRobot->Drive(0,0); //Stop the robot initially
+		     myRobot->Drive(0.0,0.0); //Stop the robot initially
 		   else if (x=2)
-		     myRobot->Drive(speed,0); //Move the robot
+		     myRobot->Drive(speed,0.0); //Move the robot
 		   else if (x=3)
-		     myRobot->Drive(0.5,0); //Decrease the speed
+		     myRobot->Drive(0.5,0.); //Decrease the speed
 		   else
-		     myRobot->Drive(0,0); //If anything else happens, STOP the robot
+		     myRobot->Drive(0.0,0.0); //If anything else happens, STOP the robot
 		     }
+		   break;
 		 }
 		 /*
 		 float releaseVoltage;
