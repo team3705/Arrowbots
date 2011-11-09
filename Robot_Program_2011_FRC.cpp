@@ -108,8 +108,16 @@ public:
 		 rightSensor = 0;
 		 leftSensor = 0;
 		 middleSensor = 0;
-
+		 */
+		 std::cout << "Running Autonomous" << std::endl;
+		 for(int x=0, x <2;x++) {
+		   
 		 float speed = 0.15; //CHECK-> enough speed to get to the peg in time as shoulder rises slowly
+		 myRobot->Drive(speed,0); //Move forward
+		 std::cout << x << std::endl;
+		 }
+		 std::cout << "Autonomous Over" << std::endl;
+		 /*
 		 float releaseVoltage;
 		 bool reachedEndOfLine = false;
 		 int followingLineNumber = 1; //2 is for the 'y' line; reading line number from left to right
@@ -133,9 +141,9 @@ public:
 		 myRobot->Drive(speed, -0.5); // right and middle sensors are on line	
 
 		 } else if (leftSensor == 1 && middleSensor == 1 && rightSensor == 0) {
-		*/
+		
 	         myRobot->Drive(speed, 0.5); // left and middle sensors are on line
-		 /*
+		
 		 } else if ((leftSensor == 1 && middleSensor == 1 && rightSensor
 		 == 1) || (leftSensor == 1 && middleSensor == 0
 		 && rightSensor == 1)) {
