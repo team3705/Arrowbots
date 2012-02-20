@@ -179,30 +179,6 @@ public:
                        }
            
        
-           
-           //For new shooter, using one button to automate everything
-       /*    if (stick.GetRawButton(9) == true) {
-                                   cim1->Set(-1); //run cim 1 at x% speed counterclockwise??
-                                   cim2->Set(1); // run cim  at x% speed clockwise
-                                   check = true; //indicate if motors are running
-                               } else if (check == true){ // if motors are running a
-                                   Wait(2.0);
-                                   belt->Set(1); // run the belt
-                                   Wait(2.0); // one sec delay
-                                   belt->Set(0.0); // turn belt off
-                                   check = false; // put new check
-                               }
-                               else if (check == false){ //if false
-                                    // 2 sec delay to wait for the first ball to shoot
-                                   cim1->Set(0.0); //stop cims
-                                   cim2->Set(0.0);
-                               }
-                               else { // Stop everything
-                                   cim1->Set(0.0); //stop cims
-                                   cim2->Set(0.0);
-                                   belt->Set(0.0);
-                               }
-                               */
                                
            
            /*if (stick->GetRawButton(8) == true) {
@@ -228,56 +204,10 @@ public:
                                            }
                                            */
 
-           /*if (stick.GetRawButton(10) == true) {
-                                               cim1->Set(-0.30); //run cim 1 at 50% speed counterclockwise??
-                                               cim2->Set(0.30); // run cim  at 50% speed clockwise
-                                               check = true; //indicate if motors are running
-                                           } else if (check == true){ // if motors are running a
-                                               Wait(2.0);
-                                               belt->Set(1); // run the belt
-                                               Wait(2.0); // one sec delay
-                                               belt->Set(0.0); // turn belt off
-                                               check = false; // put new check
-                                           }
-                                           else if (check == false){ //if false
-                                                // 2 sec delay to wait for the first ball to shoot
-                                               cim1->Set(0.0); //stop cims
-                                               cim2->Set(0.0);
-                                           }
-                                           else { // Stop everything
-                                               cim1->Set(0.0); //stop cims
-                                               cim2->Set(0.0);
-                                               belt->Set(0.0);
-                                           }
-                                           */
            
-                                   
-           //EMERGENCY CODE FOR PUSHING DOWN BALL IN CASE OF TOO MANY BALLZ
-       /*if (rightstick->GetRawButton(8) == true) {        
-               belt->Set(-1); //opens
-                               } else if (rightstick->GetRawButton(9) == true){
-                                   belt->Set(0.0); //closes
-                               }
-                               */
-                               
-                               
-           //Code for breaking wheels...
-           /*if (rightstick->GetRawButton(2)) {
-               spike->Set(Relay::kOn);
-               spike->Set(Relay::kForward);
            
-            
-           }  else if (rightstick->GetRawButton(3) == true){
-               spike->Set(Relay::kOn);
-               spike->Set(Relay::kReverse);
-
-
-           }
-           else {
-           //Wait(1.0);
-           spike->Set(Relay::kOff);
-           }
-           */
+                                  
+                               
            
            //Code for using window motor
            if (rightstick->GetRawButton(4)) {
@@ -324,6 +254,7 @@ public:
            bar->SetAngle(-60);   //set the angles to -60...counterclockwise?
           bar2->SetAngle(-60);
             }
+            
            // Initialize functions...
            //  RelayServo();
            //PreciseBelt();
@@ -343,15 +274,17 @@ public:
                    float ultraVal = rangeFinder -> GetVoltage(); //Get voltage from ultrasonic sensor
                    float tempVal = Temperature -> GetVoltage();//Gets temperature
 
-
+//Do the math to convert data received from the ultrasonic volts->miliVolts->milivolts per inch->inches
                    float Vm = (ultraVal*1000);
                    float Ri = (Vm/9.765625);
+                   
+                   // Print data back to dashboard
                    dsLCD->Printf(DriverStationLCD::kUser_Line1, 1, "Ultrasonic Range: %f",Ri);
                    dsLCD->Printf(DriverStationLCD::kUser_Line2, 1, "Gyro: %f", gyroVal);
                    dsLCD->Printf(DriverStationLCD::kUser_Line3, 1, "Temperature: %f", tempVal);
                    dsLCD->Printf(DriverStationLCD::kUser_Line4, 1, "Cim1 Speed: %f%%", (cimValue1*100)); //display speed that the mototrs are reunning at different percentages...
                    dsLCD->Printf(DriverStationLCD::kUser_Line5, 1, "Cim2 Speed: %f%%", (cimValue2*100));
-
+		   //Update dashboard
                    dsLCD->UpdateLCD();
                            
                    
