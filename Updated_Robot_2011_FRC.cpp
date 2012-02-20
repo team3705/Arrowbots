@@ -115,11 +115,23 @@ public:
                       cim2->Set(cimValue2);//Get speed from throttle, and then scale it
                       setLimit = true;
                       
+                      //Open Ball Stopper
+                      pickStop->Set(0.5); //closes ball stopper
+		      Wait(1.3);
+		      pickStop->Set(0.0);
+
+                      
                        }
                        else {
                            cim1->Set(0.0);
                            cim2->Set(0.0);
                            setLimit = false;
+                           
+                      //Close Ball Stopper  
+                      pickStop->Set(-0.5); //closes ball stopper
+		      Wait(1);
+		      pickStop->Set(0.0);
+                           
                        }
 
                           
@@ -230,7 +242,7 @@ public:
            
            
            //Code for Banebot Motor for stopping ballz
-           if (stick->GetRawButton(2) == true) { // press button TWO to close
+   /*        if (stick->GetRawButton(2) == true) { // press button TWO to close
                                pickStop->Set(-0.5); //closes ball stopper
                                Wait(1);
                                pickStop->Set(0.0);
@@ -243,6 +255,7 @@ public:
                                            //Wait(1.0);
                                    pickStop->Set(0.0);
                                }
+                               */
                                
                                
 //Code for ... servoooo
