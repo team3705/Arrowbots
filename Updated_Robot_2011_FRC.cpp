@@ -96,8 +96,8 @@ public:
        while (IsOperatorControl())
        {
            bool setLimit;
-           double cimValue1= scaleThrottle(-(stick->GetZ())); //Set desired speed from the Throttle, assuming from -1 to 1, also invert the cim, since we want it to rotate coutnerclockwise/clockwise
-           double cimValue2= scaleThrottle((stick->GetZ())); //Set desired speed from the Throttle, assuming from -1 to 1
+           double cimValue1= -scaleThrottle(-(stick->GetZ())); //Set desired speed from the Throttle, assuming from -1 to 1, also invert the cim, since we want it to rotate coutnerclockwise/clockwise
+           double cimValue2= scaleThrottle(-(stick->GetZ())); //Set desired speed from the Throttle, assuming from -1 to 1
            //For shooter
            /*if (stick.GetRawButton(1) == true) {
                            //back of the robot is moved forward by pushing forward on the joystick
@@ -111,15 +111,15 @@ public:
                        */
            //For manual button speed control, this sets the speed
             if (stick->GetRawButton(4) == true) {
+            	
+            	
+            	
                       cim1->Set(cimValue1); //use the value from the throttle to set cim speed
                       cim2->Set(cimValue2);//Get speed from throttle, and then scale it
                       setLimit = true;
                       
                       //Open Ball Stopper
-                      pickStop->Set(0.5); //closes ball stopper
-		      Wait(1.3);
-		      pickStop->Set(0.0);
-
+         
                       
                        }
                        else {
@@ -128,10 +128,7 @@ public:
                            setLimit = false;
                            
                       //Close Ball Stopper  
-                      pickStop->Set(-0.5); //closes ball stopper
-		      Wait(1);
-		      pickStop->Set(0.0);
-                           
+      
                        }
 
                           
@@ -242,7 +239,7 @@ public:
            
            
            //Code for Banebot Motor for stopping ballz
-   /*        if (stick->GetRawButton(2) == true) { // press button TWO to close
+           if (stick->GetRawButton(2) == true) { // press button TWO to close
                                pickStop->Set(-0.5); //closes ball stopper
                                Wait(1);
                                pickStop->Set(0.0);
@@ -255,7 +252,7 @@ public:
                                            //Wait(1.0);
                                    pickStop->Set(0.0);
                                }
-                               */
+                               
                                
                                
 //Code for ... servoooo
@@ -305,7 +302,7 @@ public:
        
        }
    //Code for Ultrasonic Distance Tracking for Adusting speed of cim 1 and cim 2
-void Accelerometer(void) {
+//void Accelerometer(void) {
    //float accelValueX= accelerometer->GetAcceleration(ADXL345_I2C::kAxis_X);
 //    float accelValueY= accelerometer->GetAcceleration(ADXL345_I2C::kAxis_Y);
    //float accelValueZ= accelerometer->GetAcceleration(ADXL345_I2C::kAxis_Z);
@@ -316,7 +313,7 @@ void Accelerometer(void) {
    dsLCD->Printf(DriverStationLCD::kUser_Line6, 6, "Axis Z: %f", accelValueZ);
 
     dsLCD->UpdateLCD(); // keep the dashlcd updated..*/
-}
+//}
    
 /*    void UltrasonicRange(void) {
        float ultraVal = rangeFinder -> GetVoltage(); //Get voltage from ultrasonic sensor
@@ -384,4 +381,5 @@ double scaleThrottle(double x) {
 };
 
 START_ROBOT_CLASS(RobotDemo);
+
 
